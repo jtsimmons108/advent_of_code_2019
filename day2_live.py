@@ -1,11 +1,5 @@
-import re, itertools, numpy as np
-from collections import defaultdict, deque
-
 with open('inputs/day2.in') as f:
     inpt = f.read()
-
-# with open('inputs/test.in') as f:
-#     inpt = f.read()
 
 data = inpt.strip().split(',')
 nums = list(map(int, data))
