@@ -1,6 +1,3 @@
-import re, itertools, numpy as np
-from collections import deque, defaultdict
-
 with open('inputs/day3.in') as f:
     inpt = f.read()
 
