@@ -45,7 +45,7 @@ while instructions[index] != 99:
         if op == 3:
             instructions[reg] = int(input('Enter value: '))
         elif op == 4:
-            print(instructions[reg])
+            print(get_value(instructions, param1, reg))
 
         index += 2
     elif opcode in [5,6]:
