@@ -26,6 +26,11 @@ class Intcode(object):
         self.codes = [int(code) for code in instructions.split(',')] + [0]*1000
         self.ip = 0
         self.rp = 0
+        self.linked = None
+        self.outputs = []
+
+    def set_link(self, amp):
+        self.linked = amp
 
     def get_modes(self):
         op = str(self.codes[self.ip]).zfill(5)
@@ -74,9 +79,14 @@ class Intcode(object):
         else:
             v1 = vals[0]
             if op == INPUT:
+                if len(self.inputs) == 0:
+                    return
                 self.set_value(m1, v1, self.inputs.pop(0))
             elif op == OUTPUT:
-                print(self.get_value(m1, v1))
+                out = self.get_value(m1, v1)
+                self.outputs.append(out)
+                if self.linked != None:
+                    self.linked.inputs.append(out)
             elif op == REL:
                 self.rp += self.get_value(m1, v1)
             self.ip += 2
@@ -84,3 +94,4 @@ class Intcode(object):
     def run(self):
         while self.codes[self.ip] != 99:
             self.process_instruction()
+        return self.outputs[-1]
