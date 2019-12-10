@@ -7,7 +7,7 @@ JZ = 6
 LT = 7
 EQ = 8
 REL = 9
-
+HALT = 99
 lengths = {
     ADD: 4,
     MULT: 4,
@@ -17,7 +17,8 @@ lengths = {
     JZ: 3,
     LT: 4,
     EQ: 4,
-    REL: 2
+    REL: 2,
+    HALT: 1
 }
 class Intcode(object):
 
@@ -28,6 +29,7 @@ class Intcode(object):
         self.rp = 0
         self.linked = None
         self.outputs = []
+        self.halted = False
 
     def set_link(self, amp):
         self.linked = amp
@@ -76,22 +78,30 @@ class Intcode(object):
                 self.ip = v2
             else:
                 self.ip += 3
-        else:
+        elif op in [INPUT, OUTPUT, REL]:
             v1 = vals[0]
             if op == INPUT:
                 if len(self.inputs) == 0:
-                    return
+                    return False
                 self.set_value(m1, v1, self.inputs.pop(0))
             elif op == OUTPUT:
                 out = self.get_value(m1, v1)
                 self.outputs.append(out)
                 if self.linked != None:
                     self.linked.inputs.append(out)
+                    self.ip += 2
+                    return False
             elif op == REL:
                 self.rp += self.get_value(m1, v1)
             self.ip += 2
+        else:
+            self.halted = True
+            return False
+
+        return True
 
     def run(self):
-        while self.codes[self.ip] != 99:
-            self.process_instruction()
-        return self.outputs[-1]
+        while  self.process_instruction():
+           pass
+        if self.halted:
+            return self.outputs[-1]

@@ -4,7 +4,7 @@ with open('inputs/day5.in') as f:
     data = f.read().strip()
 
 comp = Intcode(data, [1])
-comp.run()
+print(comp.run())
 
 comp = Intcode(data, [5])
-comp.run()
+print(comp.run())

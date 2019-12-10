@@ -18,7 +18,6 @@ for noun in range(100):
                 vals[vals[index + 3]]= vals[vals[index + 1]] * vals[vals[index + 2]]
             elif vals[index] == 99:
                 break
-            
             index += 4
         if vals[0] == 19690720:
             print(noun, verb)

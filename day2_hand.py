@@ -19,5 +19,5 @@ for n in range(100):
 
 end = time.time()
 print('Part 1', ans1)
-print('Part 2', ans1)
+print('Part 2', n*100 + ans2)
 print((end - start))
