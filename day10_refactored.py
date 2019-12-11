@@ -1,6 +1,6 @@
 from math import gcd, atan2, degrees
 from collections import defaultdict
-
+import time
 with open('inputs/day10.in') as f:
     data = [[c for c in line] for line in f.read().strip().split('\n')]
 
