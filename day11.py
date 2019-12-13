@@ -32,4 +32,4 @@ for panel, color in panels.items():
     grid[abs(y)][x] = color
 
 for row in grid:
-    print(''.join(['*' if c == 1 else ' ' for c in row]))
+    print(''.join(['█' if c == 1 else ' ' for c in row]))
