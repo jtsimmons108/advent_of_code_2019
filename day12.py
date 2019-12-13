@@ -47,3 +47,6 @@ for i in range(len(positions)):
     total += sum(map(abs, positions[i])) * sum(map(abs, velocities[i]))
 print(total)
 print(lcm([find_cycle(axis) for axis in axes2]))
+
+
+
