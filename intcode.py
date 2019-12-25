@@ -24,7 +24,7 @@ class Intcode(object):
 
     def __init__(self, instructions, inputs):
         self.inputs = inputs
-        self.codes = [int(code) for code in instructions.split(',')] + [0]*1000
+        self.codes = [int(code) for code in instructions.split(',')] + [0]*4000
         self.ip = 0
         self.rp = 0
         self.linked = None
